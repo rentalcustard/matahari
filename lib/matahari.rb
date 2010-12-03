@@ -6,24 +6,29 @@ module Matahari
 end
 
 class Spy
-	attr_reader :name
+	attr_reader :name, :invocations
 
 	def initialize(name = nil)
 		@name = name if name
-		@invocations = Hash.new(0)
+		@invocations = []
 	end
 
 	def method_missing(sym, *args, &block)
-		record_invocation(sym)
+		if @verifying
+			raise
+		else
+			record_invocation(sym, args)
+		end
 	end
 
-	def has_received?(sym)
-		@invocations[sym] > 0
+	def has_received?
+		@verifying = true
+		raise
 	end
-
+	
 	private
-	def record_invocation(sym)
-		@invocations[sym] += 1
+	def record_invocation(sym, *args)
+		@invocations << {:method => sym, :args => args}
 	end
 end
 
@@ -37,10 +42,28 @@ class ArgumentMatcher
 	end
 end
 
-class RSpec::Matchers::Has
-	def with(*args)
-		ArgumentMatcher.new
+class Debriefing
+  def matches?(subject)
+		invocations_matching_method = subject.invocations.select {|i| i[:method] == @call_to_verify}
+		method_matched = invocations_matching_method.size > 0 
+		matching = method_matched && @args_to_verify.size == 0 || invocations_matching_method.select {|i| i[:args].flatten === @args_to_verify}.size > 0
+
+		if matching
+			true
+		else
+			false
+		end
 	end
+
+	def method_missing(sym, *args, &block)
+		@call_to_verify = sym
+		@args_to_verify = args
+		self
+	end
+end
+
+def have_received
+	Debriefing.new
 end
 
 def spy(name = nil)

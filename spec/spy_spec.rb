@@ -27,10 +27,10 @@ describe "Spy" do
 			mata_hari.one
 			mata_hari.two
 
-			mata_hari.should have_received(:one)
-			mata_hari.should have_received(:two)
-			mata_hari.should_not have_received(:three)
-			mata_hari.should_not have_received(:four)
+			mata_hari.should have_received.one
+			mata_hari.should have_received.two
+			mata_hari.should_not have_received.three
+			mata_hari.should_not have_received.four
 		end
 
 		it "captures the details of communications" do
@@ -39,8 +39,9 @@ describe "Spy" do
 			mata_hari.one
 			mata_hari.two("Hello")
 
-			mata_hari.should have_received(:two).with("Hello")
-			mata_hari.should_not have_received(:three).with("Stuff")
+			mata_hari.should have_received.two("Hello")
+			mata_hari.should_not have_received.two("Goodbye")
+			mata_hari.should_not have_received.three("Stuff")
 		end
 	end
 end
