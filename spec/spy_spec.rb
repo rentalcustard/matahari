@@ -43,5 +43,16 @@ describe "Spy" do
 			mata_hari.should_not have_received.two("Goodbye")
 			mata_hari.should_not have_received.three("Stuff")
 		end
+
+		it "allows complex assertions about the number of calls" do
+			mata_hari = spy(:mata_hari)
+
+			mata_hari.one
+			mata_hari.one
+			mata_hari.one
+
+			mata_hari.should have_received(3.times).one
+			mata_hari.should_not have_received(4.times).one
+		end
 	end
 end

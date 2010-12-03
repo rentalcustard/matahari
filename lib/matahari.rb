@@ -43,10 +43,26 @@ class ArgumentMatcher
 end
 
 class Debriefing
+	def initialize(expected_calls = nil)
+		@expected_calls = expected_calls
+	end
+
   def matches?(subject)
 		invocations_matching_method = subject.invocations.select {|i| i[:method] == @call_to_verify}
 		method_matched = invocations_matching_method.size > 0 
-		matching = method_matched && @args_to_verify.size == 0 || invocations_matching_method.select {|i| i[:args].flatten === @args_to_verify}.size > 0
+		no_args = @args_to_verify.size == 0
+		matching_calls = invocations_matching_method.select {|i| i[:args].flatten === @args_to_verify}.size
+		if @expected_calls
+			checked_number_of_calls = true
+		  args_match = matching_calls == @expected_calls
+		else
+			args_match = matching_calls > 0
+		end
+		matching = if checked_number_of_calls
+								 args_match
+							 else
+								 method_matched && no_args || args_match
+							 end
 
 		if matching
 			true
@@ -62,8 +78,16 @@ class Debriefing
 	end
 end
 
-def have_received
-	Debriefing.new
+def have_received(times = nil)
+	if times 
+		@calls_expected = 0
+		times.each { @calls_expected+= 1 }
+
+		Debriefing.new(@calls_expected)
+	else
+		Debriefing.new
+	end
+
 end
 
 def spy(name = nil)
