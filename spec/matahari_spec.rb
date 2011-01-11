@@ -1,6 +1,7 @@
 require File.dirname(__FILE__) + "/../lib/matahari"
 require 'rspec'
 require 'rspec/expectations'
+require 'mocha'
 
 describe "Spy" do
 	it "takes an optional name parameter" do
@@ -53,6 +54,15 @@ describe "Spy" do
 
 			mata_hari.should have_received(3.times).one
 			mata_hari.should_not have_received(4.times).one
+		end
+
+		it "doesn't stop you stubbing" do
+			mata_hari = spy(:mata_hari)
+			
+			mata_hari.stubs(:test) { "Hello" }
+
+			mata_hari.test.should == "Hello"
+			mata_hari.should have_received.test			
 		end
 	end
 end

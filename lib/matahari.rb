@@ -11,6 +11,11 @@ class Spy
 	def initialize(name = nil)
 		@name = name if name
 		@invocations = []
+		@stubbed_calls = {}
+	end
+	
+	def stubs(sym, &block)
+		@stubbed_calls[sym] = block
 	end
 
 	def method_missing(sym, *args, &block)
@@ -18,6 +23,7 @@ class Spy
 			raise
 		else
 			record_invocation(sym, args)
+			@stubbed_calls[sym].call if @stubbed_calls[sym]
 		end
 	end
 
