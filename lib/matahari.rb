@@ -27,11 +27,17 @@ class Spy
 		end
 	end
 
-	def has_received?
-		@verifying = true
-		raise
+	def has_received?(times=nil)
+		if times 
+			@calls_expected = 0
+			times.each { @calls_expected+= 1 }
+
+			Debriefing.new(@calls_expected)
+		else
+			Debriefing.new
+		end
 	end
-	
+
 	private
 	def record_invocation(sym, *args)
 		@invocations << {:method => sym, :args => args}
@@ -93,7 +99,6 @@ def have_received(times = nil)
 	else
 		Debriefing.new
 	end
-
 end
 
 def spy(name = nil)

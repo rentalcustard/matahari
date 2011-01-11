@@ -64,5 +64,17 @@ describe "Spy" do
 			mata_hari.test.should == "Hello"
 			mata_hari.should have_received.test			
 		end
+
+		#this is useful for those not using rspec
+		it "allows you to check method calls via a predicate method" do
+			mata_hari = spy(:mata_hari)
+			
+			mata_hari.one
+			mata_hari.two
+			mata_hari.two
+
+			mata_hari.has_received?.one.should be_true	
+			mata_hari.has_received?(2.times).two.should be_true
+		end
 	end
 end
