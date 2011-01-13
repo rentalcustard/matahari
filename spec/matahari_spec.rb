@@ -1,6 +1,5 @@
 require File.dirname(__FILE__) + "/../lib/matahari"
 require 'rspec'
-require 'rspec/expectations'
 
 describe "Spy" do
 	it "takes an optional name parameter" do
