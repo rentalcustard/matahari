@@ -11,7 +11,7 @@ Feature: Test spying
 
 		describe "Spying" do
 			it "captures method calls and allows assertions" do
-			mark_kennedy = spy(:kennedy)
+				mark_kennedy = spy(:kennedy)
 
 				mark_kennedy.is_a_cop?
 

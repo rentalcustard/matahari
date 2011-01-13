@@ -6,7 +6,7 @@ class Spy
 		@invocations = []
 		@stubbed_calls = {}
 	end
-	
+
 	def stubs(sym, &block)
 		@stubbed_calls[sym] = block
 	end
