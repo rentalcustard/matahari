@@ -37,17 +37,6 @@ describe "Spy" do
       mata_hari.invocations.should == [{:method => :one, :args => [[]]}, {:method => :two, :args => [["Hello"]]}]
     end
 
-    # it "allows complex assertions about the number of calls" do
-    # 	mata_hari = spy(:mata_hari)
-
-    # 	mata_hari.one
-    # 	mata_hari.one
-    # 	mata_hari.one
-
-    # 	mata_hari.should have_received(3.times).one
-    # 	mata_hari.should_not have_received(4.times).one
-    # end
-
     it "doesn't stop you stubbing" do
       mata_hari = Spy.new(:mata_hari)
 
