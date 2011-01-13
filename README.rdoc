@@ -34,6 +34,13 @@ See also the cucumber feature, easily viewable at http://relishapp.com/Mortice/m
 
 * gem install matahari
 
+== ACKNOWLEDGEMENTS:
+
+* David Chelimsky, for putting up with my 'robust' criticisms of RSpec mocks
+* Aslak Hellesøy, for giving interesting feedback on an early version
+* Szczepan Faber, for creating Mockito
+* Brian Takita, for creating RR
+
 == LICENSE:
 
 (The MIT License)
