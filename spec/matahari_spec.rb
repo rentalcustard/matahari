@@ -26,10 +26,7 @@ describe "Spy" do
 			mata_hari.one
 			mata_hari.two
 
-			mata_hari.should have_received.one
-			mata_hari.should have_received.two
-			mata_hari.should_not have_received.three
-			mata_hari.should_not have_received.four
+			mata_hari.invocations.should == [{:method => :one, :args => [[]]}, {:method => :two, :args => [[]]}]
 		end
 
 		it "captures the details of communications" do
@@ -38,21 +35,19 @@ describe "Spy" do
 			mata_hari.one
 			mata_hari.two("Hello")
 
-			mata_hari.should have_received.two("Hello")
-			mata_hari.should_not have_received.two("Goodbye")
-			mata_hari.should_not have_received.three("Stuff")
+			mata_hari.invocations.should == [{:method => :one, :args => [[]]}, {:method => :two, :args => [["Hello"]]}]
 		end
 
-		it "allows complex assertions about the number of calls" do
-			mata_hari = spy(:mata_hari)
+		# it "allows complex assertions about the number of calls" do
+		# 	mata_hari = spy(:mata_hari)
 
-			mata_hari.one
-			mata_hari.one
-			mata_hari.one
+		# 	mata_hari.one
+		# 	mata_hari.one
+		# 	mata_hari.one
 
-			mata_hari.should have_received(3.times).one
-			mata_hari.should_not have_received(4.times).one
-		end
+		# 	mata_hari.should have_received(3.times).one
+		# 	mata_hari.should_not have_received(4.times).one
+		# end
 
 		it "doesn't stop you stubbing" do
 			mata_hari = spy(:mata_hari)
@@ -60,19 +55,7 @@ describe "Spy" do
 			mata_hari.stubs(:test) { "Hello" }
 
 			mata_hari.test.should == "Hello"
-			mata_hari.should have_received.test			
-		end
-
-		#this is useful for those not using rspec
-		it "allows you to check method calls via a predicate method" do
-			mata_hari = spy(:mata_hari)
-			
-			mata_hari.one
-			mata_hari.two
-			mata_hari.two
-
-			mata_hari.has_received?.one.should be_true	
-			mata_hari.has_received?(2.times).two.should be_true
+			mata_hari.invocations.should == [{:method => :test, :args => [[]]}]
 		end
 	end
 end
