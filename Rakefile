@@ -25,11 +25,11 @@ spec = Gem::Specification.new do |s|
 
   # Change these as appropriate
   s.name              = "matahari"
-  s.version           = "0.1.0"
-  s.summary           = "What this thing does"
+  s.version           = "0.1.1"
+  s.summary           = "Test spy library, inspired by Mockito and RR"
   s.author            = "Tom Stuart"
   s.email             = "tom@therye.org"
-  s.homepage          = "http://yoursite.example.com"
+  s.homepage          = "https://github.com/mortice/matahari"
 
   s.has_rdoc          = true
   s.extra_rdoc_files  = %w(README.rdoc)
