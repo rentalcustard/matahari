@@ -3,8 +3,8 @@ require 'rspec'
 
 describe "Spy" do
 	it "takes an optional name parameter" do
-		named = spy(:bond)
-		unnamed = spy
+		named = Spy.new(:bond)
+		unnamed = Spy.new
 
 		named.name.should == :bond
 		unnamed.name.should == nil
@@ -12,7 +12,7 @@ describe "Spy" do
 
 	context "in the field" do
 		it "remains as a sleeper agent until called upon" do
-			mata_hari = spy(:mata_hari)
+			mata_hari = Spy.new(:mata_hari)
 			lambda do 
 				mata_hari.one
 				mata_hari.two
@@ -21,7 +21,7 @@ describe "Spy" do
 		end
 
 		it "captures communications" do
-			mata_hari = spy(:mata_hari)
+			mata_hari = Spy.new(:mata_hari)
 
 			mata_hari.one
 			mata_hari.two
@@ -30,7 +30,7 @@ describe "Spy" do
 		end
 
 		it "captures the details of communications" do
-			mata_hari = spy(:mata_hari)
+			mata_hari = Spy.new(:mata_hari)
 
 			mata_hari.one
 			mata_hari.two("Hello")
@@ -50,7 +50,7 @@ describe "Spy" do
 		# end
 
 		it "doesn't stop you stubbing" do
-			mata_hari = spy(:mata_hari)
+			mata_hari = Spy.new(:mata_hari)
 			
 			mata_hari.stubs(:test) { "Hello" }
 
