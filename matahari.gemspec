@@ -10,11 +10,11 @@ Gem::Specification.new do |s|
   s.email = %q{tom@therye.org}
   s.extra_rdoc_files = ["README.rdoc"]
   s.files = ["README.rdoc", "test/spy_test.rb", "spec/debriefing_spec.rb", "spec/spec_helper.rb", "spec/spy_spec.rb", "lib/matahari/debriefing.rb", "lib/matahari/rspec/matchers.rb", "lib/matahari/spy.rb", "lib/matahari.rb"]
-  s.homepage = %q{http://yoursite.example.com}
+  s.homepage = %q{https://github.com/mortice/matahari}
   s.rdoc_options = ["--main", "README.rdoc"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
-  s.summary = %q{What this thing does}
+  s.summary = %q{Test spy library, inspired by Mockito and RR}
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
