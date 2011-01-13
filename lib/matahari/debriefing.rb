@@ -28,19 +28,6 @@ class Debriefing
 		end
 	end
 
-	def prettify_times(times)
-		case times
-			when 1 
-				"once"
-			when nil
-				"once"
-			when 2
-				"twice"
-			else
-				"#{times} times"
-		end
-	end
-
 	def failure_message_for_should_not
 		"Spy(:#{@subject.name}) expected not to receive :#{@call_to_verify} but received it #{prettify_times(@matching_calls)}"
 	end
@@ -58,4 +45,18 @@ class Debriefing
 		@args_to_verify = args
 		self
 	end
+	
+	def prettify_times(times)
+		case times
+			when 1 
+				"once"
+			when nil
+				"once"
+			when 2
+				"twice"
+			else
+				"#{times} times"
+		end
+	end
+	private :prettify_times
 end
