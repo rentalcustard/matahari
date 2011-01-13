@@ -69,4 +69,18 @@ describe Debriefing do
 
 		debriefing.failure_message_for_should.should == "Spy(:subject) expected to receive :one twice, received once"
 	end
+
+	it "gives a failure message for should not" do
+		subject = mock(:subject)
+		debriefing = Debriefing.new
+
+		subject.should_receive(:invocations).and_return([{:method => :two, :args => [[]]}])
+		subject.should_receive(:name).and_return(:subject)
+
+		debriefing.two
+
+		debriefing.matches?(subject).should be_true
+
+		debriefing.failure_message_for_should_not.should == "Spy(:subject) expected not to receive :two but received it once"
+	end
 end

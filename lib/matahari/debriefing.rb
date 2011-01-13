@@ -41,6 +41,10 @@ class Debriefing
 		end
 	end
 
+	def failure_message_for_should_not
+		"Spy(:#{@subject.name}) expected not to receive :#{@call_to_verify} but received it #{prettify_times(@matching_calls)}"
+	end
+
 	def failure_message_for_should
 		if @args_to_verify.size > 0
 			"Spy(:#{@subject.name}) expected to receive :#{@call_to_verify}(#{@args_to_verify.map(&:inspect).join(", ")}) #{prettify_times(@expected_calls)}, received #{prettify_times(@matching_calls)}"

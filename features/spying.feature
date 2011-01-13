@@ -41,3 +41,22 @@ Feature: Test spying
 		When I run "rspec failing_test.rb"
 		Then the output should contain "1 example, 1 failure"
 		And the output should contain "Spy(:bond) expected to receive :is_007? once, received 0 times"
+
+	Scenario: Unsuccessful spying with should_not
+		Given a file named "negative_test.rb" with:
+		"""
+		require 'matahari'
+
+		describe "negativity" do
+			it "gives descriptive messages" do
+				mata_hari = spy(:mata_hari)
+
+				mata_hari.is_a_double_agent?
+
+				mata_hari.should_not have_received.is_a_double_agent?
+			end
+		end
+		"""
+		When I run "rspec negative_test.rb"
+		Then the output should contain "1 example, 1 failure"
+		And the output should contain "Spy(:mata_hari) expected not to receive :is_a_double_agent? but received it once"
