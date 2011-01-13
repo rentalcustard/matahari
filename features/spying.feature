@@ -22,3 +22,22 @@ Feature: Test spying
 		"""
 		When I run "rspec test.rb"
 		Then the output should contain "1 example, 0 failures"
+
+	Scenario: Unsuccessful spying
+		Given a file named "failing_test.rb" with:
+		"""
+		require 'matahari'
+
+		describe "Failing" do
+			it "gives descriptive messages" do
+				james_bond = spy(:bond)
+
+				james_bond.is_a_cad?
+
+				james_bond.should have_received.is_007?
+			end
+		end
+		"""
+		When I run "rspec failing_test.rb"
+		Then the output should contain "1 example, 1 failure"
+		And the output should contain "Spy(:bond) expected to receive :is_007? once, received 0 times"
