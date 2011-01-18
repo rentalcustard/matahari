@@ -30,6 +30,7 @@ See also the cucumber feature, easily viewable at http://relishapp.com/Mortice/m
 * Stubbing implementation is incredibly basic
 * Not very usable at all for test/unit users (but this is easily fixed with an assert_received method)
 * No support for argument matchers - arguments must match exactly via == or not at all
+* We need to be able to remote-control BMWs.
 
 == INSTALL:
 
