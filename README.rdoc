@@ -16,6 +16,7 @@ you to specify all method calls, including uninteresting ones.
   describe "my object" do
     obj = MyAwesomeObject.new
     collaborator = spy(:collaborator)
+    obj.collaborator = collaborator
 
     obj.my_awesome_method
 
