@@ -1,8 +1,7 @@
 Feature: Test spying
-  As a developer
-  In order to test collaborations between objects
-  I want to use test spies
-  So that I don't have to specify irrelevant interactions
+  >As a developer  
+  In order to test collaborations between objects  
+  I want to use test spies  
 
   Scenario: Spying with rspec
     Given a file named "test.rb" with:
