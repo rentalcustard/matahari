@@ -25,7 +25,7 @@ you to specify all method calls, including uninteresting ones.
 
 See also the cucumber feature, easily viewable at http://relishapp.com/Mortice/matahari
 
-== CONTEXT
+== CONTEXT:
 
 Traditional mocks require you to put expectations (my_mock.should_receive) before action, 
 potentially with assertions coming after that. They also do stubbing at the same time as 
