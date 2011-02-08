@@ -52,6 +52,7 @@ messages later.
 === Further reading
 https://gist.github.com/716640 - Conversation between dchelimsky and myself about Ruby test 
 doubles
+
 http://dannorth.net/2008/09/14/the-end-of-endotesting/ - Article about mockito, which heavily 
 influenced the creation of Matahari
 
