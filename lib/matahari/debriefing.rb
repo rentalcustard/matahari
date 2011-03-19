@@ -5,10 +5,10 @@ class Debriefing
 
   def matches?(subject)
     @subject = subject
-    invocations_matching_method = subject.invocations.select {|i| i[:method] == @call_to_verify}
-    method_matched = invocations_matching_method.size > 0 
+    invocations_of_method = subject.invocations.select {|i| i[:method] == @call_to_verify}
+    method_matched = invocations_of_method.size > 0 
     no_args = @args_to_verify.size == 0
-    @matching_calls = invocations_matching_method.select {|i| i[:args].flatten === @args_to_verify}.size
+    @matching_calls = invocations_of_method.select {|i| i[:args].flatten === @args_to_verify}.size
     if @expected_call_count
       checked_number_of_calls = true
       args_match = @matching_calls == @expected_call_count
