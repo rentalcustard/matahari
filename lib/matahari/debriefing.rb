@@ -11,7 +11,7 @@ class Debriefing
 		end
 	end
 
-	def matching(verifying_args)
+	def match_passes?(verifying_args)
 		if @expected_call_count
 			matching_calls(verifying_args) == @expected_call_count
 		else
@@ -24,11 +24,7 @@ class Debriefing
     @invocations_of_method = subject.invocations.select {|i| i[:method] == @call_to_verify}
     verifying_args = @args_to_verify.size != 0
 
-    if matching(verifying_args)
-      true
-    else
-      false
-    end
+    match_passes?(verifying_args)
   end
 
   def failure_message_for_should_not
