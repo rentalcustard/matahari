@@ -3,16 +3,33 @@ Feature: Test spying
   In order to test collaborations between objects  
   I want to use test spies  
 
-  Scenario: Spying with rspec
-    Given a file named "test.rb" with:
+  Scenario: Successful spying
+    Given a file named "activist.rb" with:
+    """
+    class Activist
+      attr_accessor :friend
+
+      def plot_revolution!
+        if friend.is_a_cop?
+	  ""
+	else
+	  "To the barricades!"
+	end
+      end
+    end
+    """
+    And a file named "test.rb" with:
     """
     require 'matahari'
+    require 'activist'
 
     describe "Spying" do
       it "captures method calls and allows assertions" do
         mark_kennedy = spy(:kennedy)
+	activist = Activist.new
+	activist.friend = mark_kennedy
 
-        mark_kennedy.is_a_cop?
+	activist.plot_revolution!
 
         mark_kennedy.should have_received.is_a_cop?
         mark_kennedy.should_not have_received.is_a_policeman?
@@ -23,15 +40,28 @@ Feature: Test spying
     Then the output should contain "1 example, 0 failures"
 
   Scenario: Unsuccessful spying
+    Given a file named "m.rb" with:
+    """
+    class M
+      attr_writer :subordinate
+
+      def defend_state_interests
+        @subordinate.is_a_cad?
+      end
+    end
+    """
     Given a file named "failing_test.rb" with:
     """
     require 'matahari'
+		require 'm'
 
     describe "Failing" do
       it "gives descriptive messages" do
         james_bond = spy(:bond)
+				m = M.new
+				m.subordinate = james_bond
 
-        james_bond.is_a_cad?
+				m.defend_state_interests
 
         james_bond.should have_received.is_007?
       end
