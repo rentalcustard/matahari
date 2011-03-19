@@ -23,6 +23,10 @@ class Spy
   def has_received?(times=nil)
     if times 
       calls_expected = 0
+			#this method gets called with an iterator, e.g. 3.times. This doesn't make
+			#a whole lot of sense here, but it does in the context of the dsl.
+			#Anyway, we want to convert that iterator back to an integer, and this seems
+			#the easiest way
       times.each { calls_expected += 1 }
 
       Debriefing.new(calls_expected)
