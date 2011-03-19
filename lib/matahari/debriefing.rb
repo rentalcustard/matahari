@@ -1,6 +1,6 @@
 class Debriefing
-  def initialize(expected_calls = nil)
-    @expected_calls = expected_calls
+  def initialize(expected_call_count = nil)
+    @expected_call_count = expected_call_count
   end
 
   def matches?(subject)
@@ -9,9 +9,9 @@ class Debriefing
     method_matched = invocations_matching_method.size > 0 
     no_args = @args_to_verify.size == 0
     @matching_calls = invocations_matching_method.select {|i| i[:args].flatten === @args_to_verify}.size
-    if @expected_calls
+    if @expected_call_count
       checked_number_of_calls = true
-      args_match = @matching_calls == @expected_calls
+      args_match = @matching_calls == @expected_call_count
     else
       args_match = @matching_calls > 0
     end
@@ -34,9 +34,9 @@ class Debriefing
 
   def failure_message_for_should
     if @args_to_verify.size > 0
-      "Spy(:#{@subject.name}) expected to receive :#{@call_to_verify}(#{@args_to_verify.map(&:inspect).join(", ")}) #{prettify_times(@expected_calls)}, received #{prettify_times(@matching_calls)}"
+      "Spy(:#{@subject.name}) expected to receive :#{@call_to_verify}(#{@args_to_verify.map(&:inspect).join(", ")}) #{prettify_times(@expected_call_count)}, received #{prettify_times(@matching_calls)}"
     else
-      "Spy(:#{@subject.name}) expected to receive :#{@call_to_verify} #{prettify_times(@expected_calls)}, received #{prettify_times(@matching_calls)}"
+      "Spy(:#{@subject.name}) expected to receive :#{@call_to_verify} #{prettify_times(@expected_call_count)}, received #{prettify_times(@matching_calls)}"
     end
   end
 
