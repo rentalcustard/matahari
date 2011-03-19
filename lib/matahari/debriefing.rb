@@ -3,25 +3,28 @@ class Debriefing
     @expected_call_count = expected_call_count
   end
 
+	def matching_calls(verifying_args=true)
+		@matching_calls ||= if verifying_args
+			@invocations_of_method.select {|i| i[:args].flatten === @args_to_verify}.size
+		else
+			@invocations_of_method.size
+		end
+	end
+
+	def matching(verifying_args)
+		if @expected_call_count
+			matching_calls(verifying_args) == @expected_call_count
+		else
+			matching_calls(verifying_args) > 0
+		end
+	end
+
   def matches?(subject)
     @subject = subject
-    invocations_of_method = subject.invocations.select {|i| i[:method] == @call_to_verify}
-    method_matched = invocations_of_method.size > 0 
-    no_args = @args_to_verify.size == 0
-    @matching_calls = invocations_of_method.select {|i| i[:args].flatten === @args_to_verify}.size
-    if @expected_call_count
-      checked_number_of_calls = true
-      args_match = @matching_calls == @expected_call_count
-    else
-      args_match = @matching_calls > 0
-    end
-    matching = if checked_number_of_calls
-                 args_match
-               else
-                 method_matched && no_args || args_match
-               end
+    @invocations_of_method = subject.invocations.select {|i| i[:method] == @call_to_verify}
+    verifying_args = @args_to_verify.size != 0
 
-    if matching
+    if matching(verifying_args)
       true
     else
       false
