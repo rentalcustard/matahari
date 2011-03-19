@@ -15,6 +15,8 @@ Feature: complex spying
 		    @printer.reset!	
 			  @printer.print!(5)
 				@printer.print!(5)
+				@printer.power_down!(:now)
+				@printer.power_down!(:right_now)
 			end
 		end
 		"""
@@ -73,6 +75,26 @@ Feature: complex spying
 				object_under_test.do_stuff
 
 				printer.should have_received(2.times).print!(5)
+			end
+		end
+		"""
+		When I run "rspec test.rb"
+		Then the output should contain "1 example, 0 failures"
+
+	Scenario: Matching number of calls regardless of arguments
+		Given a file named "test.rb" with:
+		"""
+		require 'matahari'
+		require 'object_under_test'
+		
+		describe ObjectUnderTest do
+		  it "prints 5" do
+				printer = spy(:printer)
+			  object_under_test = ObjectUnderTest.new(printer)
+
+				object_under_test.do_stuff
+
+				printer.should have_received(2.times).power_down!
 			end
 		end
 		"""
