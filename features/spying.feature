@@ -3,6 +3,7 @@ Feature: Test spying
   In order to test collaborations between objects  
   I want to use test spies  
 
+  @wip
   Scenario: Successful spying
     Given a file named "activist.rb" with:
     """
@@ -11,32 +12,32 @@ Feature: Test spying
 
       def plot_revolution!
         if friend.is_a_cop?
-	  ""
-	else
-	  "To the barricades!"
-	end
+	        ""
+	      else
+	        "To the barricades!"
+	      end
       end
     end
     """
     And a file named "test.rb" with:
     """
     require 'matahari'
-    require 'activist'
+    require File.dirname(__FILE__) + '/activist'
 
     describe "Spying" do
       it "captures method calls and allows assertions" do
         mark_kennedy = spy(:kennedy)
-	activist = Activist.new
-	activist.friend = mark_kennedy
+        activist = Activist.new
+        activist.friend = mark_kennedy
 
-	activist.plot_revolution!
+        activist.plot_revolution!
 
         mark_kennedy.should have_received.is_a_cop?
         mark_kennedy.should_not have_received.is_a_policeman?
       end
     end
     """
-    When I run "rspec test.rb"
+    When I run `rspec test.rb`
     Then the output should contain "1 example, 0 failures"
 
   Scenario: Unsuccessful spying
@@ -53,7 +54,7 @@ Feature: Test spying
     Given a file named "failing_test.rb" with:
     """
     require 'matahari'
-		require 'm'
+    require File.dirname(__FILE__) + '/m'
 
     describe "Failing" do
       it "gives descriptive messages" do
@@ -67,7 +68,7 @@ Feature: Test spying
       end
     end
     """
-    When I run "rspec failing_test.rb"
+    When I run `rspec failing_test.rb`
     Then the output should contain "1 example, 1 failure"
     And the output should contain "Spy(:bond) expected to receive :is_007? once, received 0 times"
 
@@ -86,6 +87,6 @@ Feature: Test spying
       end
     end
     """
-    When I run "rspec negative_test.rb"
+    When I run `rspec negative_test.rb`
     Then the output should contain "1 example, 1 failure"
     And the output should contain "Spy(:mata_hari) expected not to receive :is_a_double_agent? but received it once"
