@@ -8,7 +8,4 @@ end
 require 'matahari/spy'
 require 'matahari/debriefing'
 require 'matahari/rspec/matchers'
-
-def spy(name = nil)
-  Spy.new(name)
-end
+require 'matahari/rspec/spy'
