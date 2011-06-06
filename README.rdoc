@@ -1,6 +1,6 @@
 = matahari
 
-* https://github.com/mortice/matahari
+* http://tomstuart.co.uk/2011/06/05/mocks-suck-matahari-sucks-less.html
 
 == DESCRIPTION:
 
@@ -23,7 +23,7 @@ you to specify all method calls, including uninteresting ones.
     collaborator.should have_received(3.times).some_interesting_method("Some", "arguments")
   end
 
-See also the cucumber feature, easily viewable at http://relishapp.com/Mortice/matahari
+See also the cucumber features, easily viewable at http://relishapp.com/mortice/matahari
 
 == CONTEXT:
 
