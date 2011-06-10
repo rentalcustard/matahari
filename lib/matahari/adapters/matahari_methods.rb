@@ -1,6 +1,6 @@
 module Matahari
-  module RSpec
-    module Extensions
+  module Adapters
+    module MatahariMethods
       def spy(name = nil)
         Spy.new(name)
       end

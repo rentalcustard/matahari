@@ -20,12 +20,20 @@ Feature: complex spying
       end
     end
     """
+    And a file named "spec_helper.rb" with:
+    """
+    require 'matahari'
+    require File.dirname(__FILE__) + '/object_under_test'
+
+    RSpec.configure do |config|
+      config.include Matahari::Adapters::RSpec
+    end
+    """
 
   Scenario: Matching arguments (success)
     Given a file named "test.rb" with:
     """
-    require 'matahari'
-    require File.dirname(__FILE__) + '/object_under_test'
+    require File.dirname(__FILE__) + '/spec_helper'
 
     describe ObjectUnderTest do
       it "prints 5" do
@@ -44,8 +52,7 @@ Feature: complex spying
   Scenario: Matching number of calls (success)
     Given a file named "test.rb" with:
     """
-    require 'matahari'
-    require File.dirname(__FILE__) + '/object_under_test'
+    require File.dirname(__FILE__) + '/spec_helper'
 
     describe ObjectUnderTest do
       it "prints 5" do
@@ -64,8 +71,7 @@ Feature: complex spying
   Scenario: Matching number of calls and arguments (success)
     Given a file named "test.rb" with:
     """
-    require 'matahari'
-    require File.dirname(__FILE__) + '/object_under_test'
+    require File.dirname(__FILE__) + '/spec_helper'
 
     describe ObjectUnderTest do
       it "prints 5" do
@@ -84,8 +90,7 @@ Feature: complex spying
   Scenario: Matching number of calls regardless of arguments
     Given a file named "test.rb" with:
     """
-    require 'matahari'
-    require File.dirname(__FILE__) + '/object_under_test'
+    require File.dirname(__FILE__) + '/spec_helper'
 
     describe ObjectUnderTest do
       it "prints 5" do
@@ -104,8 +109,7 @@ Feature: complex spying
   Scenario: Matching arguments (failure)
     Given a file named "test.rb" with:
     """
-    require 'matahari'
-    require File.dirname(__FILE__) + '/object_under_test'
+    require File.dirname(__FILE__) + '/spec_helper'
 
     describe ObjectUnderTest do
       it "prints 5" do
@@ -125,8 +129,7 @@ Feature: complex spying
   Scenario: matching number of calls (failure)
     Given a file named "test.rb" with:
     """
-    require 'matahari'
-    require File.dirname(__FILE__) + '/object_under_test'
+    require File.dirname(__FILE__) + '/spec_helper'
 
     describe ObjectUnderTest do
       it "prints 5" do

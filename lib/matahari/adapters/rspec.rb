@@ -1,6 +1,8 @@
 module Matahari
-  module RSpec
-    module Extensions
+  module Adapters
+    module RSpec
+      include Matahari::Adapters::MatahariMethods
+
       def have_received(times = nil)
         if times 
           @calls_expected = 0

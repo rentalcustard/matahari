@@ -3,7 +3,16 @@ Feature: Test spying
   In order to test collaborations between objects  
   I want to use test spies  
 
-  @wip
+  Background:
+    Given a file named "spec_helper.rb" with:
+    """
+    require 'matahari'
+
+    RSpec.configure do |config|
+      config.include Matahari::Adapters::RSpec
+    end
+    """
+
   Scenario: Successful spying
     Given a file named "activist.rb" with:
     """
@@ -21,7 +30,7 @@ Feature: Test spying
     """
     And a file named "test.rb" with:
     """
-    require 'matahari'
+    require File.dirname(__FILE__) + '/spec_helper'
     require File.dirname(__FILE__) + '/activist'
 
     describe "Spying" do
@@ -53,7 +62,7 @@ Feature: Test spying
     """
     Given a file named "failing_test.rb" with:
     """
-    require 'matahari'
+    require File.dirname(__FILE__) + '/spec_helper'
     require File.dirname(__FILE__) + '/m'
 
     describe "Failing" do
@@ -75,7 +84,7 @@ Feature: Test spying
   Scenario: Unsuccessful spying with should_not
     Given a file named "negative_test.rb" with:
     """
-    require 'matahari'
+    require File.dirname(__FILE__) + '/spec_helper'
 
     describe "negativity" do
       it "gives descriptive messages" do

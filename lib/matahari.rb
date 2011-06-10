@@ -3,7 +3,7 @@ $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname
 
 require 'matahari/spy'
 require 'matahari/debriefing'
-require 'matahari/rspec/matchers'
-require 'matahari/rspec/spy'
-require 'matahari/rspec/extensions'
+require 'matahari/adapters/matahari_methods'
+require 'matahari/adapters/rspec'
+require 'matahari/adapters/test_unit'
 require 'matahari/version'
