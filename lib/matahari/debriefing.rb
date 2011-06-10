@@ -1,4 +1,11 @@
 class Debriefing
+
+  #TODO I can't work out how to disentangle the 2 responsibilities of this class:
+  #1. Inspecting and acting on spy invocations
+  #2. Presenting the results of those inspections.
+  #
+  #One to revisit later when my head is less befuddled.
+
   def initialize(expected_call_count = nil)
     @expected_call_count = expected_call_count
   end
@@ -23,6 +30,9 @@ class Debriefing
     end
   end
 
+  #Allows chaining of method calls following has_received?/should have_received,
+  #e.g. spy.should_have received.some_method, where #some_method is handled by
+  #method_missing, its arguments and name being stored until #matches? is called.
   def method_missing(sym, *args, &block)
     @call_to_verify = sym
     @args_to_verify = args

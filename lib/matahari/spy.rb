@@ -31,13 +31,13 @@ class Spy
     end
   end
 
+  #Pass an iterator to this method to specify the number of times the method should
+  #have been called. E.g. spy.has_received?(3.times). While other iterators might work,
+  #the idea is to allow this nice DSL-ish way of asserting on the number of calls, hence
+  #the odd method signature.
   def has_received?(times=nil)
     if times 
       calls_expected = 0
-			#this method gets called with an iterator, e.g. 3.times. This doesn't make
-			#a whole lot of sense here, but it does in the context of the dsl.
-			#Anyway, we want to convert that iterator back to an integer, and this seems
-			#the easiest way
       times.each { calls_expected += 1 }
 
       Debriefing.new(calls_expected)
