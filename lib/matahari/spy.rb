@@ -5,9 +5,6 @@ class Spy
     @name = name if name
     @invocations = []
     @stubbed_calls = {}
-    self.class.instance_methods.each do |meth|
-      next if [:define_method, :stubs, :method_missing, :record_invocation].include?(meth)
-    end
     class << self
       instance_methods.each do |meth|
         next if [:name, :define_method, :stubs, :method_missing, :record_invocation, :invocations, :has_received?, :object_id, :respond_to?, :respond_to_missing?, :instance_eval, :instance_exec, :class_eval, :__send__, :send, :should, :should_not].include?(meth)
