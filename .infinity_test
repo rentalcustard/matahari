@@ -1,6 +1,0 @@
-infinity_test do
-  notifications :growl do
-    show_images :mode => :mario_bros
-  end
-end
-
