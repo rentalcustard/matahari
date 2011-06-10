@@ -2,4 +2,4 @@
 *.swp
 tmp/*
 pkg
-rdoc*.gem
+*.gem
