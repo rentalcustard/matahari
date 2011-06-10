@@ -75,7 +75,7 @@ influenced the creation of Matahari
 == KNOWN ISSUES/TODO:
 
 * Stubbing implementation is incredibly basic
-* Not very usable at all for test/unit users (but this is easily fixed with an assert_received method)
+* Not very usable or test/unit users (it works, but you don't get a fancy DSL.)
 * No support for argument matchers - arguments must match exactly via == or not at all
 * We need to be able to remote-control BMWs.
 
