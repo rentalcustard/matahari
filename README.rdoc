@@ -10,8 +10,7 @@ It is designed to allow you to test interactions between objects *without* requi
 you to specify all method calls, including uninteresting ones.
 
 == SYNOPSIS:
-
-  require 'matahari'
+Matahari allows you to do this (RSpec example)
 
   describe "my object" do
     obj = MyAwesomeObject.new
@@ -24,6 +23,23 @@ you to specify all method calls, including uninteresting ones.
   end
 
 See also the cucumber features, easily viewable at http://relishapp.com/mortice/matahari
+
+== USING:
+
+=== RSpec
+
+In your spec_helper, include this:
+
+  RSpec.configure do |config|
+    config.include Matahari::Adapters::RSpec
+  end
+
+=== test/unit
+In your test_helper, include this:
+
+  class Test::Unit::TestCase
+    include Matahari::Adapters::TestUnit
+  end
 
 == CONTEXT:
 
