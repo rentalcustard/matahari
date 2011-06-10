@@ -45,5 +45,23 @@ describe "Spy" do
       mata_hari.test.should == "Hello"
       mata_hari.invocations.should == [{:method => :test, :args => [[]]}]
     end
+
+    context "when a new method has been added to Object" do
+      before do
+        class Object
+          def new_method
+            "Hello!"
+          end
+        end
+      end
+
+      it "still works" do
+        mata_hari = Spy.new(:mata_hari)
+
+        mata_hari.new_method
+
+        mata_hari.invocations.should == [{:method => :new_method, :args => [[]]}]
+      end
+    end
   end
 end
