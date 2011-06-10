@@ -53,21 +53,21 @@ class Debriefing
   end
   private :prettify_times
 
-	def matching_calls(verifying_args=true)
-		@matching_calls ||= if verifying_args
-			@invocations_of_method.select {|i| i[:args].flatten === @args_to_verify}.size
-		else
-			@invocations_of_method.size
-		end
-	end
-	private :matching_calls
+  def matching_calls(verifying_args=true)
+    @matching_calls ||= if verifying_args
+                          @invocations_of_method.select {|i| i[:args].flatten === @args_to_verify}.size
+                        else
+                          @invocations_of_method.size
+                        end
+  end
+  private :matching_calls
 
-	def match_passes?(verifying_args)
-		if @expected_call_count
-			matching_calls(verifying_args) == @expected_call_count
-		else
-			matching_calls(verifying_args) > 0
-		end
-	end
-	private :match_passes?
+  def match_passes?(verifying_args)
+    if @expected_call_count
+      matching_calls(verifying_args) == @expected_call_count
+    else
+      matching_calls(verifying_args) > 0
+    end
+  end
+  private :match_passes?
 end

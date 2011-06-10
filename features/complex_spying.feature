@@ -8,7 +8,7 @@ Feature: complex spying
     """
     class ObjectUnderTest
       def initialize(printer)
-        @printer = printer
+      @printer = printer
       end
 
       def do_stuff
@@ -145,4 +145,3 @@ Feature: complex spying
     When I run `rspec test.rb`
     Then the output should contain "1 example, 1 failure"
     And the output should contain "Spy(:printer) expected to receive :print!(5) once, received twice"
-
