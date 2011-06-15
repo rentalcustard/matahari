@@ -2,7 +2,7 @@ class Spy
   attr_reader :name, :invocations
 
   def initialize(name = nil)
-    @name = name if name
+    @name = name
     @invocations = []
     @stubbed_calls = {}
     class << self
