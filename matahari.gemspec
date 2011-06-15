@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
 	s.add_development_dependency "rspec"
 	s.add_development_dependency "cucumber"
 	s.add_development_dependency "aruba"
+  s.add_development_dependency "rake"
 
 	s.require_path = "lib"
 	s.required_rubygems_version = ">= 1.3.6"
