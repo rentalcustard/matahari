@@ -7,7 +7,8 @@ class Spy
     @stubbed_calls = {}
     class << self
       instance_methods.each do |meth|
-        next if [:name, :define_method, :stubs, :method_missing, :record_invocation, :invocations, :has_received?, :object_id, :respond_to?, :respond_to_missing?, :instance_eval, :instance_exec, :class_eval, :__send__, :send, :should, :should_not].include?(meth)
+        whitelist = [:name, :define_method, :stubs, :method_missing, :record_invocation, :invocations, :has_received?, :object_id, :respond_to?, :respond_to_missing?, :instance_eval, :instance_exec, :class_eval, :__send__, :send, :should, :should_not, :__id__, :__send__]
+        next if whitelist.include?(meth) || whitelist.include?(meth.to_sym)
         undef_method(meth)
       end
     end
