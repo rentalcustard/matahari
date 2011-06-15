@@ -6,8 +6,8 @@ class Debriefing
   #
   #One to revisit later when my head is less befuddled.
 
-  def initialize(expected_call_count = nil)
-    @expected_call_count = expected_call_count
+  def initialize(iterator = nil)
+    @expected_call_count = iterator ? iterator.max + 1 : nil
   end
 
   def matches?(subject)

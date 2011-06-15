@@ -29,8 +29,7 @@ class Spy
   #the idea is to allow this nice DSL-ish way of asserting on the number of calls, hence
   #the odd method signature.
   def has_received?(times=nil)
-    times_as_int = times ? times.inject(&:+) : nil
-    Debriefing.new(times_as_int)
+    Debriefing.new(times)
   end
 
   private

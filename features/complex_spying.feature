@@ -145,3 +145,26 @@ Feature: complex spying
     When I run `rspec test.rb`
     Then the output should contain "1 example, 1 failure"
     And the output should contain "Spy(:printer) expected to receive :print!(5) once, received twice"
+
+  Scenario: matching large number of calls
+    #We had a bug where the number of calls expected was larger than 3 for a short while following
+    #85f7ab37ee5a
+    Given a file named "test.rb" with:
+    """
+    require File.dirname(__FILE__) + '/spec_helper'
+
+    describe ObjectUnderTest do
+      it "prints 5" do
+        printer = spy(:printer)
+        object_under_test = ObjectUnderTest.new(printer)
+
+        object_under_test.do_stuff
+
+        printer.should have_received(10.times).print!(5)
+      end
+    end
+    """
+    When I run `rspec test.rb`
+    Then the output should contain "1 example, 1 failure"
+    And the output should contain "Spy(:printer) expected to receive :print!(5) 10 times, received twice"
+

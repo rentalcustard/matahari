@@ -58,7 +58,7 @@ describe Debriefing do
 
   it "gives a failure message for should when method called wrong number of times" do
     subject = mock(:subject)
-    debriefing = Debriefing.new(2)
+    debriefing = Debriefing.new(2.times)
 
     subject.should_receive(:invocations).and_return([{:method => :one, :args => [[]]}])
     subject.should_receive(:name).and_return(:subject)

@@ -51,6 +51,26 @@ describe "Spy" do
       mata_hari.test.should == "Hello"
       mata_hari.invocations.should == [{:method => :test, :args => [[]]}]
     end
+    
+    describe "#has_received?" do
+      let(:mata_hari) { Spy.new(:mata_hari) }
+      context "with no iterator passed" do
+        it "returns a debriefing with no restriction on times called" do
+          Debriefing.should_receive(:new)
+
+          mata_hari.has_received?
+        end
+      end
+
+      context "with an iterator passed" do
+        it "returns a debriefing with a restriction on times called" do
+          iterator = 10.times
+          Debriefing.should_receive(:new).with(iterator)
+
+          mata_hari.has_received?(iterator)
+        end
+      end
+    end
 
     context "when a new method has been added to Object" do
       before do
