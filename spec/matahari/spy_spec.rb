@@ -37,6 +37,12 @@ describe "Spy" do
       mata_hari.invocations.should == [{:method => :one, :args => [[]]}, {:method => :two, :args => [["Hello"]]}]
     end
 
+    it "returns nil on method_missing with no stubs" do
+      mata_hari = Spy.new(:mata_hari)
+
+      mata_hari.one.should be_nil
+    end
+
     it "doesn't stop you stubbing" do
       mata_hari = Spy.new(:mata_hari)
 
