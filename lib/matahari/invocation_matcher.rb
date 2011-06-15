@@ -7,7 +7,7 @@ class InvocationMatcher
   #One to revisit later when my head is less befuddled.
 
   def initialize(iterator = nil)
-    @expected_call_count = iterator ? iterator.max + 1 : nil
+    @expected_call_count = iterator ? iterator.count : nil
   end
 
   def matches?(subject)
