@@ -20,8 +20,6 @@ class Spy
 
   #Captures the details of any method call and store for later inspection
   def method_missing(sym, *args, &block)
-    raise if @verifying
-      
     record_invocation(sym, args)
     @stubbed_calls[sym].call if @stubbed_calls[sym]
   end
@@ -31,8 +29,8 @@ class Spy
   #the idea is to allow this nice DSL-ish way of asserting on the number of calls, hence
   #the odd method signature.
   def has_received?(times=nil)
-    return Debriefing.new(times.inject(&:+)) if times
-    return Debriefing.new
+    times_as_int = times ? times.inject(&:+) : nil
+    Debriefing.new(times_as_int)
   end
 
   private
