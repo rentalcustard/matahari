@@ -1,4 +1,4 @@
-class Debriefing
+class InvocationMatcher
 
   #TODO I can't work out how to disentangle the 2 responsibilities of this class:
   #1. Inspecting and acting on spy invocations

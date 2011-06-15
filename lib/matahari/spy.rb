@@ -29,7 +29,7 @@ class Spy
   #the idea is to allow this nice DSL-ish way of asserting on the number of calls, hence
   #the odd method signature.
   def has_received?(times=nil)
-    Debriefing.new(times)
+    InvocationMatcher.new(times)
   end
 
   private

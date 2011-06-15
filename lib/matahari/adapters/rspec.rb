@@ -4,7 +4,7 @@ module Matahari
       include Matahari::Adapters::MatahariMethods
 
       def have_received(times = nil)
-        Debriefing.new(times)
+        InvocationMatcher.new(times)
       end
     end
   end
