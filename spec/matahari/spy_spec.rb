@@ -88,6 +88,20 @@ describe "Spy" do
 
         mata_hari.invocations.should == [{:method => :new_method, :args => [[]]}]
       end
+      
+      describe "#passes_on" do
+        context "when the spy is initialized with the object" do
+          before(:each) do
+            @spy = Spy.new(:mata_hari, :subject => Object.new)
+          end
+          
+          it "calls the actual method" do
+            @spy.passes_on(:new_method)
+
+            @spy.new_method.should == "Hello!"
+          end
+        end
+      end
     end
   end
 end

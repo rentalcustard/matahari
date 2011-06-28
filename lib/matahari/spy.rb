@@ -1,13 +1,14 @@
 class Spy
   attr_reader :name, :invocations
 
-  def initialize(name = nil)
+  def initialize(name = nil, opts={})
+    @subject = opts[:subject]
     @name = name
     @invocations = []
     @stubbed_calls = {}
     class << self
       instance_methods.each do |meth|
-        whitelist = [:name, :define_method, :stubs, :method_missing, :record_invocation, :invocations, :has_received?, :object_id, :respond_to?, :respond_to_missing?, :instance_eval, :instance_exec, :class_eval, :__send__, :send, :should, :should_not, :__id__, :__send__]
+        whitelist = [:name, :define_method, :stubs, :passes_on, :method_missing, :record_invocation, :invocations, :has_received?, :object_id, :respond_to?, :respond_to_missing?, :instance_eval, :instance_exec, :class_eval, :__send__, :send, :should, :should_not, :__id__, :__send__]
         next if whitelist.include?(meth) || whitelist.include?(meth.to_sym)
         undef_method(meth)
       end
@@ -17,6 +18,10 @@ class Spy
   #When a given method call, sym, is invoked on self, call block and return its result
   def stubs(sym, &block)
     @stubbed_calls[sym] = block
+  end
+
+  def passes_on(sym)
+    @stubbed_calls[sym] = @subject.method(sym)
   end
 
   #Captures the details of any method call and store for later inspection

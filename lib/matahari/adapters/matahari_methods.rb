@@ -1,8 +1,8 @@
 module Matahari
   module Adapters
     module MatahariMethods
-      def spy(name = nil)
-        Spy.new(name)
+      def spy(name = nil, opts={})
+        Spy.new(name, opts)
       end
     end
   end
