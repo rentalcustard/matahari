@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe "Spy" do
+describe Matahari::Spy do
   it "takes an optional name parameter" do
-    named = Spy.new(:bond)
-    unnamed = Spy.new
+    named = Matahari::Spy.new(:bond)
+    unnamed = Matahari::Spy.new
 
     named.name.should == :bond
     unnamed.name.should == nil
@@ -11,7 +11,7 @@ describe "Spy" do
 
   context "in the field" do
     it "remains as a sleeper agent until called upon" do
-      mata_hari = Spy.new(:mata_hari)
+      mata_hari = Matahari::Spy.new(:mata_hari)
       lambda do 
         mata_hari.one
         mata_hari.two
@@ -20,7 +20,7 @@ describe "Spy" do
     end
 
     it "captures communications" do
-      mata_hari = Spy.new(:mata_hari)
+      mata_hari = Matahari::Spy.new(:mata_hari)
 
       mata_hari.one
       mata_hari.two
@@ -29,7 +29,7 @@ describe "Spy" do
     end
 
     it "captures the details of communications" do
-      mata_hari = Spy.new(:mata_hari)
+      mata_hari = Matahari::Spy.new(:mata_hari)
 
       mata_hari.one
       mata_hari.two("Hello")
@@ -38,13 +38,13 @@ describe "Spy" do
     end
 
     it "returns nil on method_missing with no stubs" do
-      mata_hari = Spy.new(:mata_hari)
+      mata_hari = Matahari::Spy.new(:mata_hari)
 
       mata_hari.one.should be_nil
     end
 
     it "doesn't stop you stubbing" do
-      mata_hari = Spy.new(:mata_hari)
+      mata_hari = Matahari::Spy.new(:mata_hari)
 
       mata_hari.stubs(:test) { "Hello" }
 
@@ -53,7 +53,7 @@ describe "Spy" do
     end
     
     describe "#has_received?" do
-      let(:mata_hari) { Spy.new(:mata_hari) }
+      let(:mata_hari) { Matahari::Spy.new(:mata_hari) }
       context "with no iterator passed" do
         it "returns a debriefing with no restriction on times called" do
           InvocationMatcher.should_receive(:new)
@@ -82,7 +82,7 @@ describe "Spy" do
       end
 
       it "still works" do
-        mata_hari = Spy.new(:mata_hari)
+        mata_hari = Matahari::Spy.new(:mata_hari)
 
         mata_hari.new_method
 
@@ -92,7 +92,7 @@ describe "Spy" do
       describe "#passes_on" do
         context "when the spy is initialized with the object" do
           before(:each) do
-            @spy = Spy.new(:mata_hari, :subject => Object.new)
+            @spy = Matahari::Spy.new(:mata_hari, :subject => Object.new)
           end
           
           it "calls the actual method" do
