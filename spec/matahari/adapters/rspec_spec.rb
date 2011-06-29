@@ -4,7 +4,7 @@ describe Matahari::Adapters::RSpec do
   describe "#have_received" do
     context "with no iterator" do
       it "creates a InvocationMatcher with no restriction on number of calls" do
-        InvocationMatcher.should_receive(:new)
+        Matahari::InvocationMatcher.should_receive(:new)
 
         have_received
       end
@@ -14,7 +14,7 @@ describe Matahari::Adapters::RSpec do
       it "creates a InvocationMatcher with a restriction on number of calls" do
         iterator = 10.times
         
-        InvocationMatcher.should_receive(:new).with(iterator)
+        Matahari::InvocationMatcher.should_receive(:new).with(iterator)
         
         have_received(iterator)
       end

@@ -56,7 +56,7 @@ describe Matahari::Spy do
       let(:mata_hari) { Matahari::Spy.new(:mata_hari) }
       context "with no iterator passed" do
         it "returns a debriefing with no restriction on times called" do
-          InvocationMatcher.should_receive(:new)
+          Matahari::InvocationMatcher.should_receive(:new)
 
           mata_hari.has_received?
         end
@@ -65,7 +65,7 @@ describe Matahari::Spy do
       context "with an iterator passed" do
         it "returns a debriefing with a restriction on times called" do
           iterator = 10.times
-          InvocationMatcher.should_receive(:new).with(iterator)
+          Matahari::InvocationMatcher.should_receive(:new).with(iterator)
 
           mata_hari.has_received?(iterator)
         end

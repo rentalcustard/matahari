@@ -1,11 +1,11 @@
 require 'spec_helper'
-describe InvocationMatcher do
+describe Matahari::InvocationMatcher do
   it "matches simple invocations" do
     #we have to use rspec mocks here because testing matahari with matahari
     #makes my brain hurt
 
     subject = mock(:subject)
-    invocation_matcher = InvocationMatcher.new
+    invocation_matcher = Matahari::InvocationMatcher.new
 
     subject.should_receive(:invocations).and_return([{:method => :one, :args => [[]]}])
 
@@ -16,8 +16,8 @@ describe InvocationMatcher do
 
   it "matches invocations based on arguments" do
     subject = mock(:subject)
-    correct_invocation_matcher = InvocationMatcher.new
-    incorrect_invocation_matcher = InvocationMatcher.new
+    correct_invocation_matcher = Matahari::InvocationMatcher.new
+    incorrect_invocation_matcher = Matahari::InvocationMatcher.new
 
     subject.should_receive(:invocations).twice.and_return([{:method => :one, :args => [["Hello", "goodbye"]]}])
 
@@ -30,7 +30,7 @@ describe InvocationMatcher do
 
   it "gives a failure message for should when method not called" do
     subject = mock(:subject)
-    invocation_matcher = InvocationMatcher.new
+    invocation_matcher = Matahari::InvocationMatcher.new
 
     subject.should_receive(:invocations).and_return([{:method => :one, :args => [[]]}])
     subject.should_receive(:name).and_return(:subject)
@@ -44,7 +44,7 @@ describe InvocationMatcher do
 
   it "gives a failure message for should when method called with wrong arguments" do
     subject = mock(:subject)
-    invocation_matcher = InvocationMatcher.new
+    invocation_matcher = Matahari::InvocationMatcher.new
 
     subject.should_receive(:invocations).and_return([{:method => :one, :args => [[]]}])
     subject.should_receive(:name).and_return(:subject)
@@ -58,7 +58,7 @@ describe InvocationMatcher do
 
   it "gives a failure message for should when method called wrong number of times" do
     subject = mock(:subject)
-    invocation_matcher = InvocationMatcher.new(2.times)
+    invocation_matcher = Matahari::InvocationMatcher.new(2.times)
 
     subject.should_receive(:invocations).and_return([{:method => :one, :args => [[]]}])
     subject.should_receive(:name).and_return(:subject)
@@ -72,7 +72,7 @@ describe InvocationMatcher do
 
   it "gives a failure message for should not" do
     subject = mock(:subject)
-    invocation_matcher = InvocationMatcher.new
+    invocation_matcher = Matahari::InvocationMatcher.new
 
     subject.should_receive(:invocations).and_return([{:method => :two, :args => [[]]}])
     subject.should_receive(:name).and_return(:subject)
