@@ -35,7 +35,7 @@ module Matahari
       @call_to_verify = sym
       @args_to_verify = args
 
-      @expected_invocation = Matahari::Invocation.new(sym, [args])
+      @expected_invocation = args ? Matahari::Invocation.new(sym, [args]) : Matahari::Invocation.new(sym)
       self
     end
 
