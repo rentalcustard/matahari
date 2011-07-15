@@ -1,24 +1,48 @@
 require 'spec_helper'
 
 describe Matahari::Invocation do
-  it "is equal to another when its properties are the same" do
-    invocation_one = Matahari::Invocation.new(:one, [["some", "args"]])
-    invocation_two = Matahari::Invocation.new(:one, [["some", "args"]])
+  context "when method and args are the same as another invocation" do
+    before do
+      @invocation_one = Matahari::Invocation.new(:one, [["some", "args"]])
+      @invocation_two = Matahari::Invocation.new(:one, [["some", "args"]])
+    end
 
-    invocation_one.should == invocation_two
+    it "is == to the other" do
+      @invocation_one.should == @invocation_two
+    end
+
+    it "is === to the other" do
+      @invocation_one.should === @invocation_two
+    end
   end
 
-  it "is not equal to another when their method properties differ" do
-    invocation_one = Matahari::Invocation.new(:one, [["some", "args"]])
-    invocation_two = Matahari::Invocation.new(:two, [["some", "args"]])
+  context "when methods are different and args the same" do
+    before do
+      @invocation_one = Matahari::Invocation.new(:one, [["some", "args"]])
+      @invocation_two = Matahari::Invocation.new(:two, [["some", "args"]])
+    end
 
-    invocation_one.should_not == invocation_two
+    it "is not == to the other" do
+      @invocation_one.should_not == @invocation_two
+    end
+
+    it "is not === to the other" do
+      @invocation_one.should_not === @invocation_two
+    end
   end
 
-  it "is not equal to another when their args properties differ" do
-    invocation_one = Matahari::Invocation.new(:one, [["some", "args"]])
-    invocation_two = Matahari::Invocation.new(:one, [["some", "other", "args"]])
+  context "when methods are the same and args different" do
+    before do
+      @invocation_one = Matahari::Invocation.new(:one, [["some", "args"]])
+      @invocation_two = Matahari::Invocation.new(:one, [["some", "other", "args"]])
+    end
 
-    invocation_one.should_not == invocation_two
+    it "is not == to the other" do
+      @invocation_one.should_not == @invocation_two
+    end
+
+    it "is === to the other" do
+      @invocation_one.should === @invocation_two
+    end
   end
 end

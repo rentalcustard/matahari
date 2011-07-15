@@ -10,5 +10,9 @@ module Matahari
     def ==(other)
       self.method == other.method && self.args == other.args
     end
+
+    def ===(other)
+      self.method == other.method
+    end
   end
 end
