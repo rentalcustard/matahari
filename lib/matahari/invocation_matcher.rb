@@ -13,7 +13,7 @@ module Matahari
 
     def matches?(subject)
       @subject = subject
-      @invocations_of_method = subject.invocations.select {|i| i[:method] == @call_to_verify}
+      @invocations_of_method = subject.invocations.select {|i| i.method == @call_to_verify}
       verifying_args = @args_to_verify.size != 0
 
       match_passes?(verifying_args)
@@ -56,7 +56,7 @@ module Matahari
 
     def matching_calls(verifying_args=true)
       @matching_calls ||= if verifying_args
-                            @invocations_of_method.select {|i| i[:args].flatten(1) === @args_to_verify}.size
+                            @invocations_of_method.select {|i| i.args === @args_to_verify}.size
                           else
                             @invocations_of_method.size
                           end

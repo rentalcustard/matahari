@@ -41,7 +41,7 @@ module Matahari
 
     private
     def record_invocation(sym, *args)
-      @invocations << {:method => sym, :args => args}
+      @invocations << Matahari::Invocation.new(sym, args)
     end
   end
 end
