@@ -1,47 +1,48 @@
-= matahari
+# matahari
 
 * http://tomstuart.co.uk/2011/06/05/mocks-suck-matahari-sucks-less.html
+[![Build Status](https://secure.travis-ci.org/mortice/matahari.png)](http://travis-ci.org/mortice/matahari)
 
-== DESCRIPTION:
+## DESCRIPTION:
 
 Matahari is a test spy library, heavily inspired by Java's Mockito and btakita's RR.
 
 It is designed to allow you to test interactions between objects *without* requiring
 you to specify all method calls, including uninteresting ones.
 
-== SYNOPSIS:
+## SYNOPSIS:
 Matahari allows you to do this (RSpec example)
 
-  describe "my object" do
-    obj = MyAwesomeObject.new
-    collaborator = spy(:collaborator)
-    obj.collaborator = collaborator
+    describe "my object" do
+      obj = MyAwesomeObject.new
+      collaborator = spy(:collaborator)
+      obj.collaborator = collaborator
 
-    obj.my_awesome_method
+      obj.my_awesome_method
 
-    collaborator.should have_received(3.times).some_interesting_method("Some", "arguments")
-  end
+      collaborator.should have_received(3.times).some_interesting_method("Some", "arguments")
+    end
 
-See also the cucumber features, easily viewable at http://relishapp.com/mortice/matahari
+See also the cucumber features, easily viewable at [http://relishapp.com/mortice/matahari]
 
-== USING:
+## USING:
 
-=== RSpec
+### RSpec
 
 In your spec_helper, include this:
 
-  RSpec.configure do |config|
-    config.include Matahari::Adapters::RSpec
-  end
+    RSpec.configure do |config|
+      config.include Matahari::Adapters::RSpec
+    end
 
-=== test/unit
+### test/unit
 In your test_helper, include this:
 
-  class Test::Unit::TestCase
-    include Matahari::Adapters::TestUnit
-  end
+    class Test::Unit::TestCase
+      include Matahari::Adapters::TestUnit
+    end
 
-== CONTEXT:
+## CONTEXT:
 
 Traditional mocks require you to put expectations (my_mock.should_receive) before action, 
 potentially with assertions coming after that. They also do stubbing at the same time as 
@@ -65,25 +66,25 @@ similar call in the setup portion of the test - matahari spies simply collect th
 details of all messages passed to them and provide a means for inspecting those 
 messages later.
 
-=== Further reading
-https://gist.github.com/716640 - Conversation between dchelimsky and myself about Ruby test 
+### Further reading
+[https://gist.github.com/716640] - Conversation between dchelimsky and myself about Ruby test 
 doubles
 
-http://dannorth.net/2008/09/14/the-end-of-endotesting/ - Article about mockito, which heavily 
+[http://dannorth.net/2008/09/14/the-end-of-endotesting/] - Article about mockito, which heavily 
 influenced the creation of Matahari
 
-== KNOWN ISSUES/TODO:
+## KNOWN ISSUES/TODO:
 
 * Stubbing implementation is incredibly basic
 * Not very usable or test/unit users (it works, but you don't get a fancy DSL.)
 * No support for argument matchers - arguments must match exactly via == or not at all
 * We need to be able to remote-control BMWs.
 
-== INSTALL:
+## INSTALL:
 
 * gem install matahari
 
-== ACKNOWLEDGEMENTS:
+## ACKNOWLEDGEMENTS:
 
 * David Chelimsky, for putting up with my robust criticisms of RSpec mocks
 * Aslak Hellesøy, for giving interesting feedback on an early version
@@ -91,7 +92,7 @@ influenced the creation of Matahari
 * Brian Takita, for creating RR
 * James Adam, for encouraging people to add CONTEXT sections to their READMEs
 
-== LICENSE:
+## LICENSE:
 
 (The MIT License)
 
