@@ -28,6 +28,16 @@ describe Matahari::InvocationMatcher do
     incorrect_invocation_matcher.matches?(subject).should be_false
   end
 
+  it "matches arguments which are arrays" do
+    subject = mock(:subject)
+    invocation_matcher = Matahari::InvocationMatcher.new
+
+    subject.should_receive(:invocations).and_return([{:method => :one, :args => [[[2, 3, 4]]]}])
+
+    invocation_matcher.one([2, 3, 4])
+    invocation_matcher.matches?(subject).should be_true
+  end
+
   it "gives a failure message for should when method not called" do
     subject = mock(:subject)
     invocation_matcher = Matahari::InvocationMatcher.new
