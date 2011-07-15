@@ -5,7 +5,9 @@ Feature: Spying in TestUnit/Minitest
   Background: test helper
     Given a file named "test_helper.rb" with:
     """
-    require File.expand_path(File.dirname(__FILE__) + '../../../lib/matahari')
+    lib = File.expand_path('../lib/', __FILE__)
+    $:.unshift lib unless $:.include?(lib)
+    require 'matahari'
     require 'test/unit'
     class Test::Unit::TestCase
       include Matahari::Adapters::TestUnit
@@ -28,7 +30,7 @@ Feature: Spying in TestUnit/Minitest
     end
     """
     When I run `ruby test_unit_test.rb`
-    Then the output should contain "1 tests, 1 assertions, 0 failures, 0 errors, 0 skips"
+    Then the output should contain "1 tests, 1 assertions, 0 failures, 0 errors"
 
   Scenario: Using TestUnit (failing test)
     Given a file named "test_unit_test.rb" with:
@@ -46,7 +48,7 @@ Feature: Spying in TestUnit/Minitest
     end
     """
     When I run `ruby test_unit_test.rb`
-    Then the output should contain "1 tests, 1 assertions, 1 failures, 0 errors, 0 skips"
+    Then the output should contain "1 tests, 1 assertions, 1 failures, 0 errors"
     Then the output should contain "Spy(:mata_hari) expected to receive :is_a_spy? once, received 0 times"
 
   Scenario: Using test unit to assert negatively

@@ -22,6 +22,8 @@ Feature: complex spying
     """
     And a file named "spec_helper.rb" with:
     """
+    lib = File.expand_path('../lib/', __FILE__)
+    $:.unshift lib unless $:.include?(lib)
     require 'matahari'
     require File.dirname(__FILE__) + '/object_under_test'
 
