@@ -1,6 +1,7 @@
 # matahari
 
 * http://tomstuart.co.uk/2011/06/05/mocks-suck-matahari-sucks-less.html
+
 [![Build Status](https://secure.travis-ci.org/mortice/matahari.png)](http://travis-ci.org/mortice/matahari)
 
 ## DESCRIPTION:
@@ -23,7 +24,7 @@ Matahari allows you to do this (RSpec example)
       collaborator.should have_received(3.times).some_interesting_method("Some", "arguments")
     end
 
-See also the cucumber features, easily viewable at [http://relishapp.com/mortice/matahari]
+See also the cucumber features, easily viewable at http://relishapp.com/mortice/matahari
 
 ## USING:
 
@@ -67,10 +68,10 @@ details of all messages passed to them and provide a means for inspecting those
 messages later.
 
 ### Further reading
-[https://gist.github.com/716640] - Conversation between dchelimsky and myself about Ruby test 
+https://gist.github.com/716640 - Conversation between dchelimsky and myself about Ruby test 
 doubles
 
-[http://dannorth.net/2008/09/14/the-end-of-endotesting/] - Article about mockito, which heavily 
+http://dannorth.net/2008/09/14/the-end-of-endotesting/ - Article about mockito, which heavily 
 influenced the creation of Matahari
 
 ## KNOWN ISSUES/TODO:
