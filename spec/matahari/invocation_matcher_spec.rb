@@ -7,7 +7,7 @@ describe Matahari::InvocationMatcher do
     subject = mock(:subject)
     invocation_matcher = Matahari::InvocationMatcher.new
 
-    subject.should_receive(:invocations).and_return([Matahari::Invocation.new(:one, [[]])])
+    subject.should_receive(:invocations).and_return([Matahari::Invocation.new(:one)])
 
     invocation_matcher.one
 
@@ -19,7 +19,7 @@ describe Matahari::InvocationMatcher do
     correct_invocation_matcher = Matahari::InvocationMatcher.new
     incorrect_invocation_matcher = Matahari::InvocationMatcher.new
 
-    subject.should_receive(:invocations).twice.and_return([Matahari::Invocation.new(:one, [["Hello", "goodbye"]])])
+    subject.should_receive(:invocations).twice.and_return([Matahari::Invocation.new(:one, "Hello", "goodbye")])
 
     correct_invocation_matcher.one("Hello", "goodbye")
     incorrect_invocation_matcher.one("Hello", "goodbye", "Hello again")
@@ -32,7 +32,7 @@ describe Matahari::InvocationMatcher do
     subject = mock(:subject)
     invocation_matcher = Matahari::InvocationMatcher.new
 
-    subject.should_receive(:invocations).and_return([Matahari::Invocation.new(:one, [[[2, 3, 4]]])])
+    subject.should_receive(:invocations).and_return([Matahari::Invocation.new(:one, [2, 3, 4])])
 
     invocation_matcher.one([2, 3, 4])
     invocation_matcher.matches?(subject).should be_true
@@ -42,7 +42,7 @@ describe Matahari::InvocationMatcher do
     subject = mock(:subject)
     invocation_matcher = Matahari::InvocationMatcher.new
 
-    subject.should_receive(:invocations).and_return([Matahari::Invocation.new(:one, [[]])])
+    subject.should_receive(:invocations).and_return([Matahari::Invocation.new(:one)])
     subject.should_receive(:name).and_return(:subject)
 
     invocation_matcher.two
@@ -56,7 +56,7 @@ describe Matahari::InvocationMatcher do
     subject = mock(:subject)
     invocation_matcher = Matahari::InvocationMatcher.new
 
-    subject.should_receive(:invocations).and_return([Matahari::Invocation.new(:one, [[]])])
+    subject.should_receive(:invocations).and_return([Matahari::Invocation.new(:one)])
     subject.should_receive(:name).and_return(:subject)
 
     invocation_matcher.one("Hello")
@@ -70,7 +70,7 @@ describe Matahari::InvocationMatcher do
     subject = mock(:subject)
     invocation_matcher = Matahari::InvocationMatcher.new(2.times)
 
-    subject.should_receive(:invocations).and_return([Matahari::Invocation.new(:one, [[]])])
+    subject.should_receive(:invocations).and_return([Matahari::Invocation.new(:one)])
     subject.should_receive(:name).and_return(:subject)
 
     invocation_matcher.one
@@ -84,7 +84,7 @@ describe Matahari::InvocationMatcher do
     subject = mock(:subject)
     invocation_matcher = Matahari::InvocationMatcher.new
 
-    subject.should_receive(:invocations).and_return([Matahari::Invocation.new(:two, [[]])])
+    subject.should_receive(:invocations).and_return([Matahari::Invocation.new(:two)])
     subject.should_receive(:name).and_return(:subject)
 
     invocation_matcher.two
