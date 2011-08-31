@@ -19,11 +19,9 @@ module Matahari
     end
 
     def failure_message_for_should
-      if @expected_invocation.args
-        "Spy(:#{@subject.name}) expected to receive :#{@expected_invocation.method}(#{@expected_invocation.args.map(&:inspect).join(", ")}) #{prettify_times(@expected_call_count)}, received #{prettify_times(@matching_calls.size)}"
-      else
-        "Spy(:#{@subject.name}) expected to receive :#{@expected_invocation.method} #{prettify_times(@expected_call_count)}, received #{prettify_times(@matching_calls.size)}"
-      end
+      expected_arguments = @expected_invocation.args ? "(#{@expected_invocation.args.map(&:inspect).join(", ")})" : ""
+
+      "Spy(:#{@subject.name}) expected to receive :#{@expected_invocation.method}#{expected_arguments} #{prettify_times(@expected_call_count)}, received #{prettify_times(@matching_calls.size)}"
     end
 
     # Allows chaining of method calls following has_received?/should have_received,
