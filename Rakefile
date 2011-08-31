@@ -11,9 +11,8 @@ end
 RSpec::Core::RakeTask.new(:spec)
 
 Rake::TestTask.new(:units) do |t|
-  t.pattern = 'test/**/*_test.rb'
+  t.test_files = Dir["test/**/test_*.rb"]
   t.verbose = true
-  t.warning = true
 end
 
 task :default => [:spec, :units, :cucumber]
