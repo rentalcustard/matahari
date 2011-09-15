@@ -29,7 +29,7 @@ module Matahari
 
     # Captures the details of any method call and store for later inspection
     def method_missing(sym, *args, &block)
-      record_invocation(sym, args)
+      record_invocation(sym, *args)
       @stubbed_calls[sym].call if @stubbed_calls[sym]
     end
 
@@ -43,7 +43,7 @@ module Matahari
 
     private
     def record_invocation(sym, *args)
-      @invocations << Matahari::Invocation.new(sym, args)
+      @invocations << Matahari::Invocation.new(sym, *args)
     end
   end
 end

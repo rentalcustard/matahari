@@ -19,20 +19,16 @@ module Matahari
     end
 
     def failure_message_for_should
-      if @expected_invocation.args
-        "Spy(:#{@subject.name}) expected to receive :#{@expected_invocation.method}(#{@expected_invocation.args.map(&:inspect).join(", ")}) #{prettify_times(@expected_call_count)}, received #{prettify_times(@matching_calls.size)}"
-      else
-        "Spy(:#{@subject.name}) expected to receive :#{@expected_invocation.method} #{prettify_times(@expected_call_count)}, received #{prettify_times(@matching_calls.size)}"
-      end
+      expected_arguments = @expected_invocation.args ? "(#{@expected_invocation.args.map(&:inspect).join(", ")})" : ""
+
+      "Spy(:#{@subject.name}) expected to receive :#{@expected_invocation.method}#{expected_arguments} #{prettify_times(@expected_call_count)}, received #{prettify_times(@matching_calls.size)}"
     end
 
-    #Allows chaining of method calls following has_received?/should have_received,
-    #e.g. spy.should_have received.some_method, where #some_method is handled by
-    #method_missing, its arguments and name being stored until #matches? is called.
+    # Allows chaining of method calls following has_received?/should have_received,
+    # e.g. spy.should_have received.some_method, where #some_method is handled by
+    # method_missing, its arguments and name being stored until #matches? is called.
     def method_missing(sym, *args, &block)
-      #when args are supplied, we need to wrap them in an array because Invocation's #initialize
-      #flattens them by one step
-      @expected_invocation = args.size > 0 ? Matahari::Invocation.new(sym, [args]) : Matahari::Invocation.new(sym)
+      @expected_invocation = Matahari::Invocation.new(sym, *args)
       self
     end
 

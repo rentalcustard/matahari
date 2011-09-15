@@ -12,6 +12,7 @@ describe Matahari::Spy do
   context "in the field" do
     it "remains as a sleeper agent until called upon" do
       mata_hari = Matahari::Spy.new(:mata_hari)
+
       lambda do 
         mata_hari.one
         mata_hari.two
@@ -25,7 +26,7 @@ describe Matahari::Spy do
       mata_hari.one
       mata_hari.two
 
-      mata_hari.invocations.should == [Matahari::Invocation.new(:one, [[]]), Matahari::Invocation.new(:two, [[]])]
+      mata_hari.invocations.should == [Matahari::Invocation.new(:one), Matahari::Invocation.new(:two)]
     end
 
     it "captures the details of communications" do
@@ -34,7 +35,7 @@ describe Matahari::Spy do
       mata_hari.one
       mata_hari.two("Hello")
 
-      mata_hari.invocations.should == [Matahari::Invocation.new(:one, [[]]), Matahari::Invocation.new(:two, [["Hello"]])]
+      mata_hari.invocations.should == [Matahari::Invocation.new(:one), Matahari::Invocation.new(:two, "Hello")]
     end
 
     it "returns nil on method_missing with no stubs" do
@@ -49,7 +50,7 @@ describe Matahari::Spy do
       mata_hari.stubs(:test) { "Hello" }
 
       mata_hari.test.should == "Hello"
-      mata_hari.invocations.should == [Matahari::Invocation.new(:test, [[]])]
+      mata_hari.invocations.should == [Matahari::Invocation.new(:test)]
     end
     
     describe "#has_received?" do
@@ -86,7 +87,7 @@ describe Matahari::Spy do
 
         mata_hari.new_method
 
-        mata_hari.invocations.should == [Matahari::Invocation.new(:new_method, [[]])]
+        mata_hari.invocations.should == [Matahari::Invocation.new(:new_method)]
       end
       
       describe "#passes_on" do
