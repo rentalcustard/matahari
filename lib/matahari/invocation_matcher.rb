@@ -7,7 +7,7 @@ module Matahari
     def matches?(subject)
       @subject = subject
 
-      @matching_calls = @expected_invocation.args ? 
+      @matching_calls = @expected_invocation.args ?
         @subject.invocations.select {|i| @expected_invocation == i } :
         @subject.invocations.select {|i| @expected_invocation === i }
 

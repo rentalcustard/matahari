@@ -6,7 +6,7 @@ class TestUnitAdapterTest < Test::Unit::TestCase
 
   def test_assert_received_with_passing_test
     subject = spy(:matahari)
-    
+
     subject.some_method
 
     assert_received(subject) { subject.has_received?.some_method }
