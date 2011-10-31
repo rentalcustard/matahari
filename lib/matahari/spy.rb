@@ -2,7 +2,7 @@ module Matahari
   class Spy
     METHOD_WHITELIST = [:name, :define_method, :stubs, :passes_on, :method_missing, :record_invocation, :invocations,
                         :has_received?, :object_id, :respond_to?, :respond_to_missing?, :instance_eval, :instance_exec,
-                        :class_eval, :__send__, :send, :should, :should_not, :__id__] 
+                        :class_eval, :__send__, :send, :should, :should_not, :__id__]
 
     attr_reader :name, :invocations
 

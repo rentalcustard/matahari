@@ -13,9 +13,9 @@ describe Matahari::Adapters::RSpec do
     context "with an iterator" do
       it "creates a InvocationMatcher with a restriction on number of calls" do
         iterator = 10.times
-        
+
         Matahari::InvocationMatcher.should_receive(:new).with(iterator)
-        
+
         have_received(iterator)
       end
     end

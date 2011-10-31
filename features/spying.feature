@@ -1,7 +1,7 @@
 Feature: Test spying
-  >As a developer  
-  In order to test collaborations between objects  
-  I want to use test spies  
+  >As a developer
+  In order to test collaborations between objects
+  I want to use test spies
 
   Background:
     Given a file named "spec_helper.rb" with:
