@@ -45,33 +45,33 @@ In your test_helper, include this:
 
 ## CONTEXT:
 
-Traditional mocks require you to put expectations (my_mock.should_receive) before action, 
-potentially with assertions coming after that. They also do stubbing at the same time as 
-setting up expectations (my_mock.should_receive(:something).and_return). These issues 
+Traditional mocks require you to put expectations (my_mock.should_receive) before action,
+potentially with assertions coming after that. They also do stubbing at the same time as
+setting up expectations (my_mock.should_receive(:something).and_return). These issues
 lead to less readable tests and a tendency to set an expectation when only a stub is
 required, or vice versa.
 
-Test spies present an alternative philosophy to traditional mocking by acting as null 
-objects and then allowing assertions after the fact on method calls they have received. 
-This means that stubbing and asserting on collaborations can be separated and that all 
+Test spies present an alternative philosophy to traditional mocking by acting as null
+objects and then allowing assertions after the fact on method calls they have received.
+This means that stubbing and asserting on collaborations can be separated and that all
 assertions in a given test go in the same place.
 
-The RR project provides test spies, but due to the way it is built (it supports a 
-variety of different double strategies), it requires the user to call 'stub' on any 
-method which will later be asserted on. As @dchemlimsky puts it, this 'adds the need 
-for an extra line, binds these two lines [the stub call and the assertion] together, 
+The RR project provides test spies, but due to the way it is built (it supports a
+variety of different double strategies), it requires the user to call 'stub' on any
+method which will later be asserted on. As @dchemlimsky puts it, this 'adds the need
+for an extra line, binds these two lines [the stub call and the assertion] together,
 and generally makes [the test] more difficult to understand.'
 
-By sticking to spies as a double strategy, matahari is able to avoid the need for a 
-similar call in the setup portion of the test - matahari spies simply collect the 
-details of all messages passed to them and provide a means for inspecting those 
+By sticking to spies as a double strategy, matahari is able to avoid the need for a
+similar call in the setup portion of the test - matahari spies simply collect the
+details of all messages passed to them and provide a means for inspecting those
 messages later.
 
 ### Further reading
-https://gist.github.com/716640 - Conversation between dchelimsky and myself about Ruby test 
+https://gist.github.com/716640 - Conversation between dchelimsky and myself about Ruby test
 doubles
 
-http://dannorth.net/2008/09/14/the-end-of-endotesting/ - Article about mockito, which heavily 
+http://dannorth.net/2008/09/14/the-end-of-endotesting/ - Article about mockito, which heavily
 influenced the creation of Matahari
 
 ## KNOWN ISSUES/TODO:

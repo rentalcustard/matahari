@@ -12,7 +12,7 @@ describe Matahari::Spy do
   context "in the field" do
     it "remains as a sleeper agent until called upon" do
       mata_hari = Matahari::Spy.new(:mata_hari)
-      lambda do 
+      lambda do
         mata_hari.one
         mata_hari.two
         mata_hari.three
@@ -51,7 +51,7 @@ describe Matahari::Spy do
       mata_hari.test.should == "Hello"
       mata_hari.invocations.should == [Matahari::Invocation.new(:test, [[]])]
     end
-    
+
     describe "#has_received?" do
       let(:mata_hari) { Matahari::Spy.new(:mata_hari) }
       context "with no iterator passed" do
@@ -88,13 +88,13 @@ describe Matahari::Spy do
 
         mata_hari.invocations.should == [Matahari::Invocation.new(:new_method, [[]])]
       end
-      
+
       describe "#passes_on" do
         context "when the spy is initialized with the object" do
           before(:each) do
             @spy = Matahari::Spy.new(:mata_hari, :subject => Object.new)
           end
-          
+
           it "calls the actual method" do
             @spy.passes_on(:new_method)
 

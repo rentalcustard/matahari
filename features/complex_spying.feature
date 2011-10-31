@@ -12,7 +12,7 @@ Feature: complex spying
       end
 
       def do_stuff
-        @printer.reset!	
+        @printer.reset!
         @printer.print!(5)
         @printer.print!(5)
         @printer.power_down!(:now)
